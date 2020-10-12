@@ -28,7 +28,7 @@ class MovieHorizontal extends StatelessWidget {
     });
     
     return Container(
-      height: _screenSize.height * 0.2,
+      height: _screenSize.height * 0.25,
       child: PageView.builder(
         pageSnapping: false,
         controller: _pageController,
@@ -43,19 +43,22 @@ class MovieHorizontal extends StatelessWidget {
 
   Widget _tarjeta(BuildContext context, Pelicula pelicula){
 
-
+    pelicula.uniqueId = '${pelicula.id}-poster';
 
       final peliculaTarjeta =  Container(
         margin: EdgeInsets.only(right: 15.0),
         child: Column(
           children: <Widget>[
-            ClipRRect(
+            Hero(
+              tag:pelicula.uniqueId,
+              child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: FadeInImage(
                 placeholder: AssetImage('assets/no-image.jpg'),
                 image: NetworkImage(pelicula.getPosterImg()),
                 fit: BoxFit.cover,
                 height: 160.0,
+                ),
               ),
             ),
             SizedBox(height: 10.0),
@@ -83,14 +86,16 @@ class MovieHorizontal extends StatelessWidget {
         margin: EdgeInsets.only(right: 15.0),
         child: Column(
           children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: FadeInImage(
-                placeholder: AssetImage('assets/no-image.jpg'),
-                image: NetworkImage(pelicula.getPosterImg()),
-                fit: BoxFit.cover,
-                height: 160.0,
-              ),
+
+                ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: FadeInImage(
+                  placeholder: AssetImage('assets/no-image.jpg'),
+                  image: NetworkImage(pelicula.getPosterImg()),
+                  fit: BoxFit.cover,
+                  height: 160.0,
+                ),
+            
             ),
             SizedBox(height: 10.0),
             Text(
